@@ -1,1 +1,3 @@
-# ebedding-wamr
+# Embedding WAMR
+
+
