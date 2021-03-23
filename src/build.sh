@@ -1,7 +1,7 @@
 #!/bin/bash
 
-prog_name="$1"
-
 /opt/wasi-sdk/bin/clang -O3 -nostdlib \
-    -o $prog_name.wasm $prog_name.c \
-    -Wl,--no-entry -Wl,--export=$prog_name
+    -o exports.wasm exports.c \
+    -Wl,--no-entry \
+    -Wl,--export=sum \
+    -Wl,--export=add_one \

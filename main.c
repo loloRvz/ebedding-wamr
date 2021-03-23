@@ -6,7 +6,7 @@
 int main(){
 	
 	//Open and load module
-	FILE* file = fopen("./src/sum.wasm", "rb");
+	FILE* file = fopen("./src/exports.wasm", "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}
@@ -45,28 +45,42 @@ int main(){
 	wasm_extern_vec_t exports;
 	wasm_instance_exports(instance, &exports);
 	if (exports.size == 0) {
-		printf("> Error 1 accessing exports!\n"); return 1;
+		printf("> Error accessing exports!\n"); return 1;
 	}
-    const wasm_func_t* add_one_func = wasm_extern_as_func(exports.data[1]);
+    const wasm_func_t* sum_func = wasm_extern_as_func(exports.data[1]);
+    if (sum_func == NULL) {
+		printf("> Error accessing exported function sum!\n"); return 1;
+    }
+    const wasm_func_t* add_one_func = wasm_extern_as_func(exports.data[2]);
     if (add_one_func == NULL) {
-		printf("> Error 2 accessing export!\n"); return 1;
+		printf("> Error accessing exported function add_one!\n"); return 1;
     }
     wasm_module_delete(module);
     wasm_instance_delete(instance);
   
     
-	//Call function
-    printf("Calling `add_one` function...\n");
-    wasm_val_t args_val[] = { WASM_I32_VAL(8), WASM_I32_VAL(2) };
+	//Call function sum
+    printf("Calling function...\n");
+    wasm_val_t args_val[] = { WASM_I32_VAL(5), WASM_I32_VAL(11) };
     wasm_val_t results_val[1] = { WASM_INIT_VAL };
     wasm_val_vec_t args = WASM_ARRAY_VEC(args_val);
     wasm_val_vec_t results = WASM_ARRAY_VEC(results_val);
 
-    if (wasm_func_call(add_one_func, &args, &results)) {
+    if (wasm_func_call(sum_func, &args, &results)) {
         printf("> Error calling function!\n"); return 1;
     }
+    printf("Results: %d\n", results_val[0].of.i32);
+    
 
-    printf("Results of `add_one`: %d\n", results_val[0].of.i32);
+    //Call function add_one
+    printf("Calling function...\n");
+    wasm_val_t args_val2[] = { WASM_I32_VAL(5) };
+    wasm_val_vec_t args2 = WASM_ARRAY_VEC(args_val2);
+
+    if (wasm_func_call(add_one_func, &args2, &results)) {
+        printf("> Error calling function!\n"); return 1;
+    }
+    printf("Results: %d\n", results_val[0].of.i32);
 
     wasm_extern_vec_delete(&exports);
     wasm_store_delete(store);
@@ -75,7 +89,6 @@ int main(){
 }
 
 /*
-
 int main(){
 	
 	// Read the Wasm file bytes.
@@ -132,5 +145,4 @@ int main(){
 
 	return 0;
 } 
-
 */
