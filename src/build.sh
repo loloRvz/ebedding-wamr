@@ -1,8 +1,13 @@
 #!/bin/bash
 
-/opt/wasi-sdk/bin/clang -O3 -nostdlib -pthread\
-    -o exports.wasm exports.c \
-    -Wl,--shared-memory,--max-memory=131072 \
-    -Wl,--no-entry,--export=__heap_base,--export=__data_end\
+/opt/wasi-sdk/bin/clang \
+	-o module.wasm module.c \
+	-O3 -z stack-size=8192 -nostdlib \
+	-Wl,--initial-memory=65536 \
+    -Wl,--strip-all,--no-entry \
+    -Wl,--export=__heap_base,--export=__data_end \
     -Wl,--export=sum \
     -Wl,--export=add_one \
+    -Wl,--export-all
+
+wamrc -o module.aot module.wasm

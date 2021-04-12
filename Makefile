@@ -2,11 +2,10 @@
 #Makefile
 
 CC     = gcc
-INCL   = -I$(shell $(WASMER_DIR)/bin/wasmer config --includedir)
+INCL   = -I$(WASM_DIR)/core/iwasm/include
 CFLAGS = -g -c -Wall $(INCL)
-LDFLAGS = -Wl,-rpath,$(shell $(WASMER_DIR)/bin/wasmer config --libdir)
-LDLIBS = -lm $(shell $(WASMER_DIR)/bin/wasmer config --libs)
-
+LDFLAGS = -Wl,-rpath,$(WASM_DIR)/product-mini/platforms/linux/build
+LDLIBS = -lm -L$(WASM_DIR)/product-mini/platforms/linux/build -liwasm 
 
 CFILES = $(wildcard *.c)
 OFILES = $(CFILES:.c=.o)
@@ -42,4 +41,9 @@ clean:
 #Depency rules
 #####################################################
 # DO NOT DELETE THIS LINE
-main.o: main.c /home/lolo/.wasmer/include/wasmer.h
+main.o: main.c \
+ /home/lolo/Documents/wasm-micro-runtime/core/iwasm/include/wasm_c_api.h \
+ /home/lolo/Documents/wasm-micro-runtime/core/iwasm/include/wasm_export.h \
+ /home/lolo/Documents/wasm-micro-runtime/core/iwasm/include/lib_export.h \
+ /home/lolo/Documents/wasm-micro-runtime/core/iwasm/include/lib_export.h \
+ /home/lolo/Documents/wasm-micro-runtime/core/iwasm/include/aot_export.h
