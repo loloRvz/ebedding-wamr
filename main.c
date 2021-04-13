@@ -8,10 +8,7 @@
 #include "lib_export.h"
 #include "aot_export.h"
 
-
 #define own
-
-
 
 int main(){
 	
@@ -23,7 +20,7 @@ int main(){
 	
 	//Load binary
 	printf("Loading binary...\n");
-	FILE* file = fopen("./src/module2.wasm", "rb");
+	FILE* file = fopen("./src/module.wasm", "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}
@@ -61,6 +58,7 @@ int main(){
 	printf("Extracting export...\n");
 	own wasm_extern_vec_t exports;
 	wasm_instance_exports(instance, &exports);
+	printf("**here!\n");
 	if (exports.size == 0) {
 		printf("> Error accessing exports!\n"); return 1;
 	}
@@ -83,7 +81,6 @@ int main(){
 	args[1].kind = WASM_I32;
 	args[1].of.i32 = 9;
 	wasm_val_t results[1];
-	printf("Calling export...\n");
 	if (wasm_func_call(sum_func, args, results)) {
 		printf("> Error calling function!\n"); return 1;
 	}

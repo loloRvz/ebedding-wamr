@@ -146,40 +146,69 @@ DEFINE_REINTERPRET(f64_reinterpret_i64, u64, f64)
 DEFINE_REINTERPRET(i64_reinterpret_f64, f64, u64)
 
 
-static u32 func_types[1];
+static u32 func_types[2];
 
 static void init_func_types(void) {
   func_types[0] = wasm_rt_register_func_type(2, 1, WASM_RT_I32, WASM_RT_I32, WASM_RT_I32);
+  func_types[1] = wasm_rt_register_func_type(0, 1, WASM_RT_I32);
 }
 
 static u32 sum(u32, u32);
+static u32 f1(void);
+
+static u32 g0;
+static u32 __data_end;
+static u32 __heap_base;
 
 static void init_globals(void) {
+  g0 = 9216u;
+  __data_end = 1024u;
+  __heap_base = 9216u;
 }
+
+static wasm_rt_table_t T0;
 
 static u32 sum(u32 p0, u32 p1) {
   FUNC_PROLOGUE;
   u32 i0, i1;
-  i0 = p0;
-  i1 = p1;
+  i0 = p1;
+  i1 = p0;
   i0 += i1;
   FUNC_EPILOGUE;
   return i0;
 }
+
+static u32 f1(void) {
+  FUNC_PROLOGUE;
+  u32 i0;
+  i0 = 0u;
+  FUNC_EPILOGUE;
+  return i0;
+}
+
 
 static void init_memory(void) {
 }
 
 static void init_table(void) {
   uint32_t offset;
+  wasm_rt_allocate_table((&T0), 1, 1);
 }
 
 /* export: 'sum' */
 u32 (*WASM_RT_ADD_PREFIX(Z_sumZ_iii))(u32, u32);
+/* export: '__data_end' */
+u32 (*WASM_RT_ADD_PREFIX(Z___data_endZ_i));
+/* export: '__heap_base' */
+u32 (*WASM_RT_ADD_PREFIX(Z___heap_baseZ_i));
 
 static void init_exports(void) {
   /* export: 'sum' */
   WASM_RT_ADD_PREFIX(Z_sumZ_iii) = (&sum);
+  /* export: '__data_end' */
+  WASM_RT_ADD_PREFIX(Z___data_endZ_i) = (&__data_end);
+  /* export: '__heap_base' */
+  WASM_RT_ADD_PREFIX(Z___heap_baseZ_i) = (&__heap_base);
 }
 
 void WASM_RT_ADD_PREFIX(init)(void) {

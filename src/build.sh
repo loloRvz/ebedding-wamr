@@ -7,7 +7,6 @@
     -Wl,--strip-all,--no-entry \
     -Wl,--export=__heap_base,--export=__data_end \
     -Wl,--export=sum \
-    -Wl,--export=add_one \
-    -Wl,--export-all
+    -Wl,--import-memory
 
 wamrc -o module.aot module.wasm
