@@ -46,7 +46,6 @@ int main(){
 	
 	// Instantiate.
 	printf("Instantiating module...\n");
-	//const wasm_extern_t* imports[] = {  };
 	own wasm_instance_t* instance =
 	wasm_instance_new(store, module, NULL, NULL);
 	if (!instance) {
@@ -58,7 +57,6 @@ int main(){
 	printf("Extracting export...\n");
 	own wasm_extern_vec_t exports;
 	wasm_instance_exports(instance, &exports);
-	printf("**here!\n");
 	if (exports.size == 0) {
 		printf("> Error accessing exports!\n"); return 1;
 	}
