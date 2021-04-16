@@ -7,6 +7,9 @@
     -Wl,--strip-all,--no-entry \
     -Wl,--export=__heap_base,--export=__data_end \
     -Wl,--export=sum \
-    -Wl,--import-memory
+    -Wl,--import-memory 
 
 wamrc -o module.aot module.wasm
+
+tftp 192.168.0.224 -c put module.wasm
+tftp 192.168.0.224 -c put module.aot
