@@ -3,15 +3,16 @@
 #include <assert.h>
 #include <stdint.h>
 
-
 #include "wasm_c_api.h"
-#include "wasm_export.h"
-#include "lib_export.h"
-#include "aot_export.h"
 
 #define own
 
-int main(){
+int main(int argc, char *argv[]){
+	
+	if(argc != 2){
+		printf("> Error incorrect input!\n"); return 1;
+	}
+	
 	
 	//Initialise
 	printf("Initialising...\n");
@@ -21,7 +22,7 @@ int main(){
 	
 	//Load binary
 	printf("Loading binary...\n");
-	FILE* file = fopen("./src/module.wasm", "rb");
+	FILE* file = fopen(argv[1], "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}

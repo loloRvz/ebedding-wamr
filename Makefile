@@ -2,10 +2,10 @@
 #Makefile
 
 CC     = gcc
-INCL   = -I$(WASM_DIR)/core/iwasm/include
+INCL   = -I$(WAMR_DIR)/core/iwasm/include
 CFLAGS = -g -c -Wall $(INCL)
-LDFLAGS = -Wl,-rpath,$(WASM_DIR)/product-mini/platforms/linux/build
-LDLIBS = -lm -L$(WASM_DIR)/product-mini/platforms/linux/build -liwasm 
+LDFLAGS = -Wl,-rpath,$(WAMR_DIR)/product-mini/platforms/linux/build
+LDLIBS = -lm -L$(WAMR_DIR)/product-mini/platforms/linux/build -liwasm 
 
 CFILES = $(wildcard *.c)
 OFILES = $(CFILES:.c=.o)
