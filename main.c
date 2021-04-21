@@ -7,12 +7,10 @@
 
 #define own
 
+
+
+
 int main(int argc, char *argv[]){
-	
-	if(argc != 2){
-		printf("> Error incorrect input!\n"); return 1;
-	}
-	
 	
 	//Initialise
 	printf("Initialising...\n");
@@ -22,7 +20,7 @@ int main(int argc, char *argv[]){
 	
 	//Load binary
 	printf("Loading binary...\n");
-	FILE* file = fopen(argv[1], "rb");
+	FILE* file = fopen("./module/module.aot", "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}
