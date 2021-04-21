@@ -8,6 +8,10 @@
 #define own
 
 
+own wasm_trap_t* callback_func(const wasm_val_t args[], wasm_val_t results[]){
+	printf("Running callback function...\n");
+	return NULL;
+}
 
 
 int main(int argc, char *argv[]){
@@ -20,7 +24,7 @@ int main(int argc, char *argv[]){
 	
 	//Load binary
 	printf("Loading binary...\n");
-	FILE* file = fopen("./module/module.aot", "rb");
+	FILE* file = fopen("./src/module.aot", "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}
@@ -44,13 +48,21 @@ int main(int argc, char *argv[]){
 	wasm_byte_vec_delete(&binary);
 	
 	
+	// Create external print functions.
+	printf("Creating callback...\n");
+	own wasm_functype_t* call_type = wasm_functype_new_0_0();
+	own wasm_func_t* call_func = wasm_func_new(store,call_type,callback_func);
+	wasm_functype_delete(call_type);
+	
+	
 	// Instantiate.
 	printf("Instantiating module...\n");
-	own wasm_instance_t* instance =
-	wasm_instance_new(store, module, NULL, NULL);
+	const wasm_extern_t* imports[] = { wasm_func_as_extern(call_func) };
+	own wasm_instance_t* instance = wasm_instance_new(store, module, imports, NULL);
 	if (!instance) {
 		printf("> Error instantiating module!\n"); return 1;
 	}
+	wasm_func_delete(call_func);
 	
 	
 	//Extract eports
@@ -60,9 +72,13 @@ int main(int argc, char *argv[]){
 	if (exports.size == 0) {
 		printf("> Error accessing exports!\n"); return 1;
 	}
-	const wasm_func_t* sum_func = wasm_extern_as_func(exports.data[0]);
-	if (sum_func == NULL) {
+	const wasm_func_t* sum_wasmfunc = wasm_extern_as_func(exports.data[0]);
+	if (sum_wasmfunc == NULL) {
 		printf("> Error accessing export!\n"); return 1;
+	}
+	const wasm_func_t* call_wasmfunc = wasm_extern_as_func(exports.data[1]);
+	if (call_wasmfunc == NULL) {
+		printf("> Error accessing export!\n");return 1;
 	}
     
     
@@ -79,14 +95,17 @@ int main(int argc, char *argv[]){
 	args[1].kind = WASM_I32;
 	args[1].of.i32 = 9;
 	wasm_val_t results[1];
-	if (wasm_func_call(sum_func, args, results)) {
+	if (wasm_func_call(sum_wasmfunc, args, results)) {
+		printf("> Error calling function!\n"); return 1;
+	}
+	if (wasm_func_call(call_wasmfunc, args, results)) {
 		printf("> Error calling function!\n"); return 1;
 	}
     wasm_extern_vec_delete(&exports);
     
     
 	// Print result.
-	printf("Printing result...\n");
+	printf("Printing result of sum_func...\n");
 	printf("> %u\n", results[0].of.i32);
     
     
@@ -96,4 +115,7 @@ int main(int argc, char *argv[]){
     wasm_engine_delete(engine);
 
 }
+
+
+
 
