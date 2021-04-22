@@ -1,6 +1,6 @@
 # Embedding WAMR
 
-This repo documents the progress of running WASM modules from a 'native' 
+This repo documents my progress of running WASM modules from a 'native' 
 C program. 
 
 In this example, [main.c](https://github.com/loloRvz/embedding-wamr/blob/main/main.c)
