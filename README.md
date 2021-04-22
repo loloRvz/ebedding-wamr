@@ -18,10 +18,12 @@ need to:
 * Clone the [WAMR](https://github.com/bytecodealliance/wasm-micro-runtime)
 repo and define its root as ```WAMR_DIR``` in your environment variables.
 * Be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
-	* Installing [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
+	* Install [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
 and extracting the archive to default path ```/opt/wasi-sdk```.
-	* Installing [wamrc](https://github.com/bytecodealliance/wasm-micro-runtime#build-wamrc-aot-compiler),
-the AoT compiler and adding it to you PATH.
+	* Install [wamrc](https://github.com/bytecodealliance/wasm-micro-runtime#build-wamrc-aot-compiler),
+the AoT compiler and add it to you PATH.
+* Build [iwasm](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md)
+with the WASM interpreter disabled and AoT enabled.
 
 ## Building and Running
 
