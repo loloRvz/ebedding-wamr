@@ -25,6 +25,13 @@ the AoT compiler and add it to you PATH.
 * Build [iwasm](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md)
 with the WASM interpreter disabled and AoT enabled.
 
+## Example
+
+The current example WASM module contains the following functions:
+* sum(), which takes to integer parameters and returns their sum
+* callback(), which calls a C function 'callback_func' that was imported
+from main.c to the module. 
+
 ## Building and Running
 
 ```
