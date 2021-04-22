@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "wasm_c_api.h"
+#include "wasm_export.h"
 
 #define own
 
@@ -19,6 +20,7 @@ int main(int argc, char *argv[]){
 	//Initialise
 	printf("Initialising...\n");
 	wasm_engine_t* engine = wasm_engine_new();
+	//wasm_engine_t* engine = wasm_engine_new_with_args(Alloc_With_System_Allocator,NULL,2);
 	wasm_store_t* store = wasm_store_new(engine);
 	
 	
@@ -87,7 +89,7 @@ int main(int argc, char *argv[]){
     wasm_instance_delete(instance);
     
     
-	//Call export
+	//Call sum() and print result
 	printf("Calling sum()...\n");
 	wasm_val_t args[2];
 	args[0].kind = WASM_I32;
@@ -101,19 +103,16 @@ int main(int argc, char *argv[]){
 	printf("Printing result of sum()...\n");
 	printf("> %u\n", results[0].of.i32);
 	
+	//Call callback()
 	printf("Calling callback()...\n");
 	if (wasm_func_call(call_wasmfunc, args, results)) {
 		printf("> Error calling function!\n"); return 1;
 	}
-    wasm_extern_vec_delete(&exports);
-    
-    
-	// Print result.
 	
-    
-    
+	
 	//Shut down
     printf("Shutting down...\n");
+    wasm_extern_vec_delete(&exports);
     wasm_store_delete(store);
     wasm_engine_delete(engine);
 

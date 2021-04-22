@@ -2,7 +2,8 @@
 #Makefile
 
 CC     = gcc
-INCL   = -I$(WAMR_DIR)/core/iwasm/include
+INCL   += -I$(WAMR_DIR)/core/iwasm/include
+INCL   += -I$(WAMR_DIR)/core/iwasm/common
 CFLAGS = -g -c -Wall $(INCL)
 LDFLAGS = -Wl,-rpath,$(WAMR_DIR)/product-mini/platforms/linux/build
 LDLIBS = -lm -L$(WAMR_DIR)/product-mini/platforms/linux/build -liwasm 
