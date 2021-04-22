@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 
 /opt/wasi-sdk/bin/clang \
 	-o module.wasm module.c \
@@ -11,4 +11,3 @@
     -Wl,--import-memory \
 
 wamrc -o module.aot module.wasm
-
