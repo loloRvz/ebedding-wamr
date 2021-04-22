@@ -1,9 +1,14 @@
 # Embedding WAMR
 
-This repo documents the progress of running wasm modules from a 'native' 
-C program. In this example, 'main.c' is our C program and module.aot, is 
-the wasm module, which is written in C, then compiled to the AoT wasm
-format.
+This repo documents the progress of running WASM modules from a 'native' 
+C program. 
+
+In this example, [main.c](https://github.com/loloRvz/embedding-wamr/blob/main/main.c)
+is our C program and [module.aot](https://github.com/loloRvz/embedding-wamr/blob/main/src/module.aot)
+is the WASM module. Notice that it is written in C, then compiled to the
+AoT wasm format. 
+
+This example program aims to serve as a template for future applications.
 
 ## Prerequisites
 
@@ -29,10 +34,10 @@ with the WASM interpreter disabled and AoT enabled.
 
 The current example WASM module contains the following functions:
 * sum(), which takes to integer parameters and returns their sum
-* callback(), which calls a C function 'callback_func' that was imported
-from main.c to the module. 
+* callback(), which calls the C function 'callback_func' that was imported
+from main.c to the WASM module. 
 
-## Building and Running
+## Building and Running the example
 
 ```
 cd src
