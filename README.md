@@ -14,7 +14,8 @@ sudo apt-get install gcc build-essential
 ```
 
 If you'd like to make modifications to the wasm module and rebuild it you'll 
-need to have properly installed WAMR
+need to have properly installed (WAMR)[https://github.com/bytecodealliance/wasm-micro-runtime] 
+
 
 ## Building and Running
 
