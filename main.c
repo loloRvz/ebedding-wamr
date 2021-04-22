@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     
     
 	//Call export
-	printf("Calling export...\n");
+	printf("Calling sum()...\n");
 	wasm_val_t args[2];
 	args[0].kind = WASM_I32;
 	args[0].of.i32 = 6;
@@ -98,6 +98,10 @@ int main(int argc, char *argv[]){
 	if (wasm_func_call(sum_wasmfunc, args, results)) {
 		printf("> Error calling function!\n"); return 1;
 	}
+	printf("Printing result of sum()...\n");
+	printf("> %u\n", results[0].of.i32);
+	
+	printf("Calling callback()...\n");
 	if (wasm_func_call(call_wasmfunc, args, results)) {
 		printf("> Error calling function!\n"); return 1;
 	}
@@ -105,8 +109,7 @@ int main(int argc, char *argv[]){
     
     
 	// Print result.
-	printf("Printing result of sum_func...\n");
-	printf("> %u\n", results[0].of.i32);
+	
     
     
 	//Shut down
