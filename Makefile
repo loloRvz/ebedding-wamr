@@ -12,7 +12,7 @@ SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
 
-TARGET = project
+TARGET = wafle
 
 %.d: %.c
 	@set -e; rm -f $@; \
@@ -29,6 +29,6 @@ $(TARGET): $(OBJS)
 
 clean:
 	@echo "Cleaning object files and executable..."
-	@/bin/rm -f *.o *.d TARGET Makefile.new
+	@/bin/rm -f *.o *.d $(TARGET) Makefile.new
 
 -include $(DEPS)
