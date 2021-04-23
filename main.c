@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 	//wasm_engine_t* engine = wasm_engine_new_with_args(Alloc_With_System_Allocator,NULL,2);
 	wasm_store_t* store = wasm_store_new(engine);
 	
-	
+	printf("hello\n");
 	//Load binary
 	printf("Loading binary...\n");
 	FILE* file = fopen("./src/module.aot", "rb");
