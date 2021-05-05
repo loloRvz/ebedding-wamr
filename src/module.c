@@ -8,7 +8,7 @@ int sum(int a, int b){
 
 __attribute__((import_name("callback"))) void callback(void);
 
-void call_callback(){
+void callcallback(){
 	callback();
 }
 

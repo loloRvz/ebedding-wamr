@@ -46,7 +46,7 @@ cd ..
 
 make clean
 make
-./project
+./wafle
 ```
 
 
