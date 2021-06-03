@@ -17,16 +17,32 @@ own wasm_trap_t* callback_func(const wasm_val_t args[], wasm_val_t results[]){
 
 int main(int argc, char *argv[]){
 	
+	if(argc != 2){
+		printf("> Error incorrect input!\nUsage: wafle aot_file.aot\n"); 
+		return 1;
+	}
+	
+	//Select run mode (.wasm/.aot)
+	int runmode;
+	if(strstr(argv[1],".wasm")){
+		runmode = 0;
+		//printf("> Running interpreter mode\n");
+	}else if(strstr(argv[1],".aot")){
+		runmode = 2;
+		//printf("> Running AoT mode\n");
+	}else{
+		printf("> Error file type not supported"); return 1;
+	}
+	
 	//Initialise
 	printf("Initialising...\n");
 	wasm_engine_t* engine = wasm_engine_new();
-	//wasm_engine_t* engine = wasm_engine_new_with_args(Alloc_With_System_Allocator,NULL,2);
 	wasm_store_t* store = wasm_store_new(engine);
 	
 	
 	//Load binary
 	printf("Loading binary...\n");
-	FILE* file = fopen("./src/module.aot", "rb");
+	FILE* file = fopen(argv[1], "rb");
 	if (!file) {
 	  printf("> Error opening module!\n"); return 1;
 	}
