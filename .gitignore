@@ -3,3 +3,5 @@
 src/*.wasm
 src/*.aot
 src/*.cpp
+
+wafle
