@@ -1,0 +1,5 @@
+*.d
+*.o
+src/*.wasm
+src/*.aot
+src/*.cpp
