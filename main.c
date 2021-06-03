@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <inttypes.h>
 
 #include "wasm_c_api.h"
 #include "wasm_export.h"
@@ -85,16 +88,19 @@ int main(int argc, char *argv[]){
 	
 	//Extract eports
 	printf("Extracting export...\n");
+	own wasm_exporttype_vec_t export_types;
 	own wasm_extern_vec_t exports;
+	wasm_module_exports(module, &export_types);
 	wasm_instance_exports(instance, &exports);
+	assert(exports.size == export_types.size);
 	if (exports.size == 0) {
 		printf("> Error accessing exports!\n"); return 1;
 	}
-	const wasm_func_t* sum_wasmfunc = wasm_extern_as_func(exports.data[0]);
+	const wasm_func_t* sum_wasmfunc = wasm_extern_as_func(exports.data[1]);
 	if (sum_wasmfunc == NULL) {
 		printf("> Error accessing export!\n"); return 1;
 	}
-	const wasm_func_t* call_wasmfunc = wasm_extern_as_func(exports.data[1]);
+	const wasm_func_t* call_wasmfunc = wasm_extern_as_func(exports.data[2]);
 	if (call_wasmfunc == NULL) {
 		printf("> Error accessing export!\n");return 1;
 	}
