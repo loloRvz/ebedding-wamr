@@ -29,7 +29,7 @@ To build and run this program you will need to clone the wasm-micro-runtime repo
 and build the necessary tools:
 
 * Clone the [WAMR](https://github.com/bytecodealliance/wasm-micro-runtime)
-repo and set environment variable ```WAMR_DIR``` equal to be the directory of this repo:
+repo in your home directory and set the environment variable ```WAMR_DIR``` equal to be the directory of this repo:
 ```
 cd
 git clone https://github.com/bytecodealliance/wasm-micro-runtime.git
