@@ -29,20 +29,20 @@ git clone https://github.com/loloRvz/embedding-wamr.git
 To build and run this program you will need to clone the wasm-micro-runtime repo
 and build the necessary tools:
 
-* Clone the [WAMR](https://github.com/bytecodealliance/wasm-micro-runtime)
+1. Clone the [WAMR](https://github.com/bytecodealliance/wasm-micro-runtime)
 repo in your home directory and set the environment variable ```WAMR_DIR``` equal to be the directory of this repo:
 ```
 cd
 git clone https://github.com/bytecodealliance/wasm-micro-runtime.git
 sudo nano .bashrc
 ```
-add the following line in the .bashrc file:
+Add the following line at the end of your .bashrc file:
 ```
 export WAMR_DIR="~/wasm-micro-runtime"
 ```
 Save, exit, and reload .bashrc: ```source .bashrc```
 
-* Be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
+2. To be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
 	* Download [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
 and extracting the archive to the default path ```/opt/wasi-sdk```.
 ```
