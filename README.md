@@ -1,7 +1,7 @@
 # Embedding WAMR
 
 This repo documents my progress of running WASM modules from a 'native' 
-C program. 
+C program using the wasm-c-api. 
 
 In this example, [main.c](https://github.com/loloRvz/embedding-wamr/blob/main/main.c)
 is our C program and [module.aot](https://github.com/loloRvz/embedding-wamr/blob/main/src/module.aot)
