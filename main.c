@@ -21,7 +21,7 @@ own wasm_trap_t* callback_func(const wasm_val_t args[], wasm_val_t results[]){
 int main(int argc, char *argv[]){
 	
 	if(argc != 2){
-		printf("> Error incorrect input!\nUsage: wafle aot_file.aot\n"); 
+		printf("> Error incorrect input!\nUsage: wafle wasm_file\n"); 
 		return 1;
 	}
 	

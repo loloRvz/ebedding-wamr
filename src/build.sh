@@ -9,12 +9,5 @@
     -Wl,--export=callcallback \
     -Wl,--export=__heap_base \
     
-#clang++ module.c -ObjC++ --compile --target=wasm32-unknown-unknown-wasm --optimize=3 -o test.wasm 
-
-wasm2wat -o mod.wat mod.wasm
 wamrc -o mod.aot mod.wasm
-
-wat2wasm -o sum.wasm sum.wat
-wamrc  -o sum.aot sum.wasm
-
 

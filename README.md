@@ -18,10 +18,29 @@ To build the C program you'll need the essential C-programming tools:
 sudo apt-get install gcc build-essential
 ```
 
-If you'd like to add you own modifications to the wasm module and rebuild
-it you'll need to:
+Clone this repo to your workspace of choice. For our sake, we will be working
+in the home directory:
+```
+cd
+git clone https://github.com/loloRvz/embedding-wamr.git
+```
+
+To build and run this program you will need to clone the wasm-micro-runtime repo
+and build the necessary tools:
+
 * Clone the [WAMR](https://github.com/bytecodealliance/wasm-micro-runtime)
-repo and define its root as ```WAMR_DIR``` in your environment variables.
+repo and set environment variable ```WAMR_DIR``` equal to be the directory of this repo:
+```
+cd
+git clone https://github.com/bytecodealliance/wasm-micro-runtime.git
+sudo nano .bashrc
+```
+add the following line in the .bashrc file:
+```
+export WAMR_DIR="~/wasm-micro-runtime"
+```
+Save and exit.
+
 * Be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
 	* Install [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
 and extracting the archive to default path ```/opt/wasi-sdk```.
@@ -46,7 +65,7 @@ cd ..
 
 make clean
 make
-./wafle
+./wafle src/mod.aot
 ```
 
 
