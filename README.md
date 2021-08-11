@@ -39,13 +39,35 @@ add the following line in the .bashrc file:
 ```
 export WAMR_DIR="~/wasm-micro-runtime"
 ```
-Save and exit.
+Save, exit, and reload .bashrc: ```source .bashrc```
 
 * Be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
-	* Install [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
+	* Download [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
 and extracting the archive to default path ```/opt/wasi-sdk```.
+```
+curl -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-linux.tar.gz > wasi-sdk.tar.gz
+tar xfv wasi-sdk.tar.gz
+sudo mv wasi-sdk-12.0 /opt/wasi-sdk
+```
+
 	* Install [wamrc](https://github.com/bytecodealliance/wasm-micro-runtime#build-wamrc-aot-compiler),
 the AoT compiler and add it to you PATH.
+```
+cd $WAMR_DIR/wamr-compiler
+./build_llvm.sh (this step will take a while)
+mkdir build && cd build
+cmake ..
+make
+
+cd
+sudo nano .bashrc
+```
+Add the following line in your .bashrc file:
+```
+export PATH=$PATH:~/wasm-micro-runtime/wamr-compiler/build
+```
+Save, exit, and reload .bashrc: ```source .bashrc```
+
 * Build [iwasm](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md)
 with the WASM interpreter disabled and AoT enabled.
 
