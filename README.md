@@ -25,6 +25,7 @@ cd
 git clone https://github.com/loloRvz/embedding-wamr.git
 ```
 
+### WAMR
 To build and run this program you will need to clone the wasm-micro-runtime repo
 and build the necessary tools:
 
@@ -43,7 +44,7 @@ Save, exit, and reload .bashrc: ```source .bashrc```
 
 * Be able to [build WASM applications](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wasm_app.md):
 	* Download [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)
-and extracting the archive to default path ```/opt/wasi-sdk```.
+and extracting the archive to the default path ```/opt/wasi-sdk```.
 ```
 curl -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-linux.tar.gz > wasi-sdk.tar.gz
 tar xfv wasi-sdk.tar.gz
