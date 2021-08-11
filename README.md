@@ -69,7 +69,13 @@ export PATH=$PATH:~/wasm-micro-runtime/wamr-compiler/build
 Save, exit, and reload .bashrc: ```source .bashrc```
 
 * Build [iwasm](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md)
-with the WASM interpreter disabled and AoT enabled.
+with the WASM interpreter and AoT enabled.
+```
+cd $WAMR_DIR/product-mini/platforms/linux
+mkdir build && cd build
+cmake .. -DWAMR_BUILD_INTERP=1 -DWAMR_BUILD_AOT=1 -DWAMR_BUILD_LIBC_WASI=0 -DWAMR_BUILD_PLATFORM=linux
+make
+```
 
 ## Example
 

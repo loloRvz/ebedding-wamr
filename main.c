@@ -26,14 +26,7 @@ int main(int argc, char *argv[]){
 	}
 	
 	//Select run mode (.wasm/.aot)
-	int runmode;
-	if(strstr(argv[1],".wasm")){
-		runmode = 0;
-		//printf("> Running interpreter mode\n");
-	}else if(strstr(argv[1],".aot")){
-		runmode = 2;
-		//printf("> Running AoT mode\n");
-	}else{
+	if(!strstr(argv[1],".wasm") && !strstr(argv[1],".aot")){
 		printf("> Error file type not supported"); return 1;
 	}
 	
