@@ -38,7 +38,7 @@ sudo nano .bashrc
 ```
 Add the following line at the end of your .bashrc file:
 ```
-export WAMR_DIR="~/wasm-micro-runtime"
+export WAMR_DIR="$HOME/wasm-micro-runtime"
 ```
 Save, exit, and reload .bashrc: ```source .bashrc```
 
@@ -50,6 +50,7 @@ and extracting the archive to the default path ```/opt/wasi-sdk```.
 curl -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-linux.tar.gz > wasi-sdk.tar.gz
 tar xfv wasi-sdk.tar.gz
 sudo mv wasi-sdk-12.0 /opt/wasi-sdk
+rm wasi-sdk.tar.gz
 ```
 
 * Install [wamrc](https://github.com/bytecodealliance/wasm-micro-runtime#build-wamrc-aot-compiler),
@@ -66,7 +67,7 @@ sudo nano .bashrc
 ```
 Add the following line in your .bashrc file:
 ```
-export PATH=$PATH:~/wasm-micro-runtime/wamr-compiler/build
+export PATH=$PATH:$HOME/wasm-micro-runtime/wamr-compiler/build
 ```
 Save, exit, and reload .bashrc: ```source .bashrc```
 
