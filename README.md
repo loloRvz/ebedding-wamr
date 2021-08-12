@@ -90,7 +90,7 @@ from main.c to the WASM module.
 ## Building and Running the example
 
 ```
-cd src
+cd $HOME/embedding-wamr/src
 ./build.sh
 cd ..
 
